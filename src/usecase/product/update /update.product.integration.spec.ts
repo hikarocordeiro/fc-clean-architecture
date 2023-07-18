@@ -48,7 +48,7 @@ describe("Test update product use case", () => {
     expect(result).toEqual(output);
   });
 
-  it("should thrown an error when name is missing", async () => {
+  it("should throw an error when name is missing", async () => {
     const productRepository = new ProductRepository();
     const useCase = new UpdateProductUseCase(productRepository);
     const product = new Product(uuid(), "product", 10);
@@ -59,8 +59,9 @@ describe("Test update product use case", () => {
       name: "",
       price: 10,
     };
+
     await expect(useCase.execute(input)).rejects.toThrow(
-      new Error("Name is required")
+        new Error("product: Name is required")
     );
   });
 
@@ -75,8 +76,9 @@ describe("Test update product use case", () => {
       name: "product",
       price: -10,
     };
+
     await expect(useCase.execute(input)).rejects.toThrow(
-      new Error("Price must be greater than zero")
+        new Error("product: Price must be greater than zero")
     );
   });
 });
